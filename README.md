@@ -1,4 +1,4 @@
-## About Colorbox:
+## About Mobilepopup:
 Mobilepopup - jQuery pop-up plugin.  See the [project page](http://alexeydudka.com/mobilepopup/) for documentation and a demonstration, and the [FAQ](http://alexeydudka.com/mobilepopup/) for solutions and examples to common issues.  Released under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
 
