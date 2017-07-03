@@ -1,5 +1,5 @@
 /*
-    ver 1.0
+    ver 1.3
     $.mobilepopup jQuery plugin
     2017 Alexey Dudka
 */
