@@ -43,15 +43,15 @@
 	    	options = $.extend(defaults, args);
 	    	currenttopposition = $("body").scrollTop();
 	      	append_html_to_body();
+            set_popup_outer_sizes();
 	    	get_popup_content();
-	    	init_actions();
 	    	popupblock.addClass("open");
 	    	$("body").addClass("mobilepopup-opened")
 	    	if($(document).width()<=767){ $("body").scrollTop(0); }
 	    },
 	    reload: function(args) {
 	    	options = $.extend(defaults, args);
-	    	popupblock.attr("class",popupblock_class+" "+options.customclass);
+            popupblock.attr("class",popupblock_class+" "+options.customclass+" open loading");
             set_popup_outer_sizes();
 	    	get_popup_content();
 	    },
@@ -71,11 +71,12 @@
 		    popupoverflow = $("."+popupoverflow_class);
             popupinner = $("."+popupinner_class);
 		    popupouter = $("."+popupouter_class);
-            set_popup_outer_sizes();
+            init_actions();
     	}
     }
 
     var set_popup_outer_sizes = function(){
+        popupouter.removeAttr("style");
         var sizes = "";
         if($.trim(options.width)!=""){
             sizes += "width:"+options.width+";";
@@ -95,7 +96,7 @@
 	    	});
     	}
     	if($.trim(options.html)!=""||$.trim(options.targetblock)!=""){
-    		popupinner.html($.trim(options.html)!="" ? options.html : $(options.targetblock).find(">*").clone());
+		    popupinner.html($.trim(options.html)!="" ? options.html : $(options.targetblock).find(">*").clone());
             popupblock.removeClass("loading");
             options.onloaded(popupblock);
     	}

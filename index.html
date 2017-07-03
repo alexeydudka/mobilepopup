@@ -1,20 +1,121 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mobile popup example 1</title>
+        <title>Mobilepopup - jQuery pop-up plugin</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
         <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/mobilepopup/src/mobilepopup.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+        <link rel="stylesheet" href="/mobilepopup/src/mobilepopup.min.css">
         <link rel="stylesheet" type="text/css" href="/mobilepopup/main.css">
     </head>
     <body>
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    	<script type="text/javascript" src="/mobilepopup/src/mobilepopup.min.js"></script>
-        <script type="text/javascript">
-            $().ready(function(){
-                $.mobilePopup({"html":"sdfsd sdf sdf"});
-            });
-        </script>
+    
+    <section class="section">
+        <div class="container">
+            <h1>Mobilepopup - jQuery pop-up plugin</h1><br><br><br>
+            <h3>Example (<a href="" class="popup-demo">demo</a>):</h3>
+<pre><code class="language-javascript">
+$("body").on("click",".popup-demo",function(){
+    $.mobilepopup({
+        targetblock:".pop-up1",
+        width:"500px",
+        height:"300px"
+    });
+    return false;
+});
+
+$("body").on("click",".get-demopopup2",function(){
+    $.mobilepopup('reload',{
+        targetblock:".pop-up2",
+        width:"500px",
+        height:"400px"
+    });
+    return false;
+});</code></pre>
+
+<pre><code class="html">&#60;div class="pop-up1" style="display: none;"&#62;
+    &#60;div class="header"&#62;Demo popup 1&#60;/div&#62;
+    &#60;div class="content"&#62;
+        &#60;p&#62;
+            Demo popup 1 content&#60;br&#62;
+            Demo popup 1 content&#60;br&#62;
+            Demo popup 1 content&#60;br&#62;
+            Demo popup 1 content&#60;br&#62;
+            Demo popup 1 content&#60;br&#62;
+            Demo popup 1 content&#60;br&#62;
+            Demo popup 1 content&#60;br&#62;
+            Demo popup 1 content
+        &#60;/p&#62;
+    &#60;/div&#62;
+    &#60;div class="footer"&#62;
+        &#60;a href="" class="button get-demopopup2"&#62;Open demo 2&#60;/a&#62;
+    &#60;/div&#62;
+&#60;/div&#62;
+
+&#60;div class="pop-up2" style="display: none;"&#62;
+    &#60;div class="header"&#62;Demo popup 2&#60;/div&#62;
+    &#60;div class="content"&#62;
+        &#60;p&#62;
+            Demo popup 2 content&#60;br&#62;
+            Demo popup 2 content&#60;br&#62;
+            Demo popup 2 content&#60;br&#62;
+            Demo popup 2 content&#60;br&#62;
+            Demo popup 2 content&#60;br&#62;
+            Demo popup 2 content&#60;br&#62;
+            Demo popup 2 content&#60;br&#62;
+            Demo popup 2 content
+        &#60;/p&#62;
+    &#60;/div&#62;
+    &#60;div class="footer"&#62;
+        &#60;a href="" class="button close"&#62;Close pop-up&#60;/a&#62;
+    &#60;/div&#62;
+&#60;/div&#62;</code></pre>
+
+            <div class="pop-up1" style="display: none;">
+                <div class="header">Demo popup 1</div>
+                <div class="content">
+                    <p>
+                        Demo popup 1 content<br>
+                        Demo popup 1 content<br>
+                        Demo popup 1 content<br>
+                        Demo popup 1 content<br>
+                        Demo popup 1 content<br>
+                        Demo popup 1 content<br>
+                        Demo popup 1 content<br>
+                        Demo popup 1 content
+                    </p>
+                </div>
+                <div class="footer">
+                    <a href="" class="button get-demopopup2">Open demo 2</a>
+                </div>
+            </div>
+
+            <div class="pop-up2" style="display: none;">
+                <div class="header">Demo popup 2</div>
+                <div class="content">
+                    <p>
+                        Demo popup 2 content<br>
+                        Demo popup 2 content<br>
+                        Demo popup 2 content<br>
+                        Demo popup 2 content<br>
+                        Demo popup 2 content<br>
+                        Demo popup 2 content<br>
+                        Demo popup 2 content<br>
+                        Demo popup 2 content
+                    </p>
+                </div>
+                <div class="footer">
+                    <a href="" class="button close">Close pop-up</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="/mobilepopup/src/mobilepopup.min.js"></script>
+    <script src="/mobilepopup/common.js"></script>
     </body>
 </html>
