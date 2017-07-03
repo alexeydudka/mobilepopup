@@ -10,7 +10,7 @@ $().ready(function(){
 
 	$("body").on("click",".get-demopopup2",function(){
 		$.mobilepopup('reload',{
-			targetblock:".pop-up2",
+			html:".pop-up2",
 			width:"500px",
 			height:"400px"
 		});

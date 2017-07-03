@@ -30,7 +30,6 @@
     }; 
 
     var options = defaults,
-    	_this = this,
     	popupblock_class = "mobilepopup",
     	popupoverflow_class = "mobilepopup-overflow",
         popupouter_class = "mobilepopup-outer",
@@ -40,7 +39,8 @@
 
 	var methods = {
 	    init : function(args) { 
-	    	options = $.extend(defaults, args);
+            var opt = {};
+	    	options = $.extend(opt, defaults, args);
 	    	currenttopposition = $("body").scrollTop();
 	      	append_html_to_body();
             set_popup_outer_sizes();
@@ -50,11 +50,17 @@
 	    	if($(document).width()<=767){ $("body").scrollTop(0); }
 	    },
 	    reload: function(args) {
-	    	options = $.extend(defaults, args);
+            var opt = {};
+            options = $.extend(opt, defaults, args);
             popupblock.attr("class",popupblock_class+" "+options.customclass+" open loading");
             set_popup_outer_sizes();
 	    	get_popup_content();
 	    },
+        resize: function(args) {
+            var opt = {};
+            options = $.extend(opt, defaults, args);
+            set_popup_outer_sizes();
+        },
 	    close : function( ) {
 	    	popupblock.removeClass("open");
 	    	$("body").removeClass("mobilepopup-opened");
@@ -76,7 +82,6 @@
     }
 
     var set_popup_outer_sizes = function(){
-        popupouter.removeAttr("style");
         var sizes = "";
         if($.trim(options.width)!=""){
             sizes += "width:"+options.width+";";

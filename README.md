@@ -5,6 +5,9 @@ Mobilepopup - jQuery pop-up plugin.  See the [project page](http://alexeydudka.c
 ## Changelog:
 
 ##### Version 1.2 - July 03 2017
+* fix bug of extending default object, created new methon - resize
+
+##### Version 1.2 - July 03 2017
 * fix bugs in reload method, created example page
 
 ##### Version 1.1 - July 03 2017
