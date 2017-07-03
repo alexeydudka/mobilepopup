@@ -114,7 +114,7 @@
             var form = popupblock.find(".popup-form");
             popupblock.addClass("loading");
             $.post(form.attr("action")+"?"+form.serialize(),function(data){
-                options.onformsubmited(popupblock,data);
+                options.onformsubmited(data,popupblock);
                 popupblock.removeClass("loading");
             });
             return false;
