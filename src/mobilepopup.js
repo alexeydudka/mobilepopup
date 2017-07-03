@@ -18,13 +18,13 @@
         loadinghtml: '<div class="loader-wrap"><div class="loader"><span></span><span></span><span></span></div></div>',
         customclass: '',
 
-        onloaded : function(){
+        onloaded : function(el){
             return true;
         },
-        onclosed : function(){
+        onclosed : function(el){
             return true;
         },
-        onformsubmited : function(data){ 
+        onformsubmited : function(data,el){ 
             return true;
         }
     }; 
@@ -60,7 +60,7 @@
 	    	$("body").removeClass("mobilepopup-opened");
 	    	if($(document).width()<=767){ $("body").scrollTop(currenttopposition); }
     		popupinner.html("");
-            options.onclosed();
+            options.onclosed(popupblock);
 	    }
 	};
 
@@ -91,13 +91,13 @@
 	    	$.post(options.ajax,function(data){
 	    		popupinner.html(data);
                 popupblock.removeClass("loading");
-                options.onloaded();
+                options.onloaded(popupblock);
 	    	});
     	}
     	if($.trim(options.html)!=""||$.trim(options.targetblock)!=""){
     		popupinner.html($.trim(options.html)!="" ? options.html : $(options.targetblock).find(">*").clone());
             popupblock.removeClass("loading");
-            options.onloaded();
+            options.onloaded(popupblock);
     	}
     }
 
@@ -114,7 +114,7 @@
             var form = popupblock.find(".popup-form");
             popupblock.addClass("loading");
             $.post(form.attr("action")+"?"+form.serialize(),function(data){
-                options.onformsubmited(data);
+                options.onformsubmited(popupblock,data);
                 popupblock.removeClass("loading");
             });
             return false;
