@@ -50,15 +50,13 @@
 	    	if($(document).width()<=767){ $("body").scrollTop(0); }
 	    },
 	    reload: function(args) {
-            var opt = {};
-            options = $.extend(opt, defaults, args);
+            options = $.extend(options, args);
             popupblock.attr("class",popupblock_class+" "+options.customclass+" open loading");
             set_popup_outer_sizes();
 	    	get_popup_content();
 	    },
         resize: function(args) {
-            var opt = {};
-            options = $.extend(opt, defaults, args);
+            options = $.extend(options, args);
             set_popup_outer_sizes();
         },
 	    close : function( ) {
