@@ -49,7 +49,6 @@
 	    	popupblock.addClass("open");
 	    	$("body").addClass("mobilepopup-opened");
 	    	if($(document).width()<=767){ $("body").scrollTop(0); }
-            set_poppup_max_sizes();
 	    },
 	    reload: function(args) {
             options = $.extend(options, args);
@@ -90,6 +89,7 @@
             sizes += "height:"+options.height+";";
         }
         popupouter.attr("style",sizes);
+        set_poppup_max_sizes();
     }
 
     var get_popup_content = function(){
