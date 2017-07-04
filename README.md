@@ -4,6 +4,9 @@ Mobilepopup - jQuery pop-up plugin.  See the [project page](http://alexeydudka.c
 
 ## Changelog:
 
+##### Version 1.4 - July 04 2017
+* fix chrome bug vh window max-height size
+
 ##### Version 1.3 - July 03 2017
 * fix bug of extending default object, created new methon - resize
 

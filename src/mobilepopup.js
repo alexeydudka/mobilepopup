@@ -1,5 +1,5 @@
 /*
-    ver 1.3
+    ver 1.4
     $.mobilepopup jQuery plugin
     2017 Alexey Dudka
 */
@@ -35,6 +35,7 @@
         popupouter_class = "mobilepopup-outer",
     	popupinner_class = "mobilepopup-inner",
     	currenttopposition = 0,
+        _window = $(window);
     	popupblock = popupoverflow = popupouter = popupinner = "";
 
 	var methods = {
@@ -46,8 +47,9 @@
             set_popup_outer_sizes();
 	    	get_popup_content();
 	    	popupblock.addClass("open");
-	    	$("body").addClass("mobilepopup-opened")
+	    	$("body").addClass("mobilepopup-opened");
 	    	if($(document).width()<=767){ $("body").scrollTop(0); }
+            set_poppup_max_sizes();
 	    },
 	    reload: function(args) {
             options = $.extend(options, args);
@@ -105,6 +107,10 @@
     	}
     }
 
+    var set_poppup_max_sizes = function(){
+        popupouter.css({"max-width":_window.innerWidth()+"px","max-height":_window.innerHeight()+"px"});
+    }
+
     var init_actions = function(){
     	popupoverflow.on("click",function(){
 			methods.close();
@@ -122,6 +128,9 @@
                 popupblock.removeClass("loading");
             });
             return false;
+        });
+        _window.on('orientationchange resize', function() {
+            set_poppup_max_sizes();
         });
     }
 
