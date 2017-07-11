@@ -10,9 +10,7 @@ $font-size: 16px;
 $prefs: ("","-o-","-ms-","-webkit-","-moz-");
 $color: #2b2b2b;
 
-body.mobilepopup-opened > *:not(.mobilepopup){
-	display: none !important;
-}
+body.mobilepopup-opened{overflow: hidden !important;}
 
 .mobilepopup{
 	float: left; display: none; 

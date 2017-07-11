@@ -34,8 +34,7 @@
     	popupoverflow_class = "mobilepopup-overflow",
         popupouter_class = "mobilepopup-outer",
     	popupinner_class = "mobilepopup-inner",
-    	currenttopposition = 0,
-        _window = $(window);
+        _window = $(window),
     	popupblock = popupoverflow = popupouter = popupinner = "";
 
 	var methods = {
@@ -48,7 +47,6 @@
 	    	get_popup_content();
 	    	popupblock.addClass("open");
 	    	$("body").addClass("mobilepopup-opened");
-	    	if($(document).width()<=767){ $("body").scrollTop(0); }
 	    },
 	    reload: function(args) {
             options = $.extend(options, args);
@@ -63,7 +61,6 @@
 	    close : function( ) {
 	    	popupblock.removeClass("open");
 	    	$("body").removeClass("mobilepopup-opened");
-	    	if($(document).width()<=767){ $("body").scrollTop(currenttopposition); }
     		popupinner.html("");
             options.onclosed(popupblock);
 	    }
