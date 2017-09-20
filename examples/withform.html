@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mobilepopup - jQuery pop-up plugin</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+        <link rel="stylesheet" href="/mobilepopup/src/mobilepopup.min.css">
+        <link rel="stylesheet" type="text/css" href="/mobilepopup/main.css">
+    </head>
+    <body>
+    
+    <section class="section">
+        <div class="container">
+            <h1>Mobilepopup - jQuery pop-up plugin</h1><br><br><br>
+            <h3>Example (<a href="" class="popup-form">demo</a>):</h3>
+<pre><code class="language-javascript">
+$("body").on("click",".popup-form",function(){
+    $.mobilepopup({
+		targetblock:".pop-up-form",
+		width:"300px",
+		height:"300px",
+		onformsubmited: function(data, el){
+			$.mobilepopup('reload',{html:data});
+		}
+	});
+    return false;
+});
+</code></pre>
+		<div class="pop-up-form" style="display: none;">
+			<div class="header">We need your opinion!</div>
+			<div class="content">
+				<form action="/mobilepopup/examples/ajax.html" class="mobilepopup-form">
+					<p>Please post any bugs, issues and suggestions about this page. This will help us to better enhance it.</p>
+					<textarea name="comment" placeholder="Write your comment"></textarea>
+				</form>
+			</div>
+			<div class="footer">
+				<a href="" class="submit-mobilepopup-form button">Send</a>
+			</div>
+		</div>
+
+            
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="/mobilepopup/src/mobilepopup.min.js"></script>
+    <script src="/mobilepopup/common.js"></script>
+    </body>
+</html>

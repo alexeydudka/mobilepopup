@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mobilepopup - jQuery pop-up plugin</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+        <link rel="stylesheet" href="/mobilepopup/src/mobilepopup.min.css">
+        <link rel="stylesheet" type="text/css" href="/mobilepopup/main.css">
+    </head>
+    <body>
+    
+    <section class="section">
+        <div class="container">
+            <h1>Mobilepopup - jQuery pop-up plugin, confirm modal example</h1><br><br><br>
+            <h3>Example of confirm action (<a href="" class="confirm-action">demo</a>):</h3>
+<pre><code class="language-javascript">
+$("body").on("click",".confirm-action",function(){
+	$.mobilepopup({
+		type:"confirm",
+		width:"500px",
+		height:"auto",
+		closeonoverflowclick: false,
+		fullscreeninmobile: false,
+		onconfirmed: function(el){
+			alert("Action confirmed");
+		}
+	});
+	return false;
+});</code></pre>
+<br><br><br>
+	<h3>Example go to link (<a href="http://alexeydudka.com/mobilepopup/" class="confirm-goto-link">demo</a>):</h3>
+<pre><code class="language-javascript">
+$("body").on("click",".confirm-goto-link",function(e){
+	e.preventDefault();
+	var link = $(this);
+	$.mobilepopup({
+		type:"confirm",
+		width:"500px",
+		height:"auto",
+		closeonoverflowclick: false,
+		fullscreeninmobile: false,
+		onconfirmed: function(el){
+			location.href = link.attr("href");
+		}
+	});
+	return false;
+});</code></pre>
+		</div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="/mobilepopup/src/mobilepopup.min.js"></script>
+    <script src="/mobilepopup/common.js"></script>
+    </body>
+</html>

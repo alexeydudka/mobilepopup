@@ -1,5 +1,5 @@
 /*
-    ver 1.4
+    ver 1.5
     $.mobilepopup jQuery plugin
     2017 Alexey Dudka
 */
@@ -10,9 +10,29 @@
         ajax: '',
         html: '',
         targetblock: '',
+        content: {
+            header: '',
+            content: '',
+            footer: ''
+        },
+
+        type: 'standart', //'confirm'
+        confirmcontent: {
+            header: "Confirm your action",
+            content: "Are you sure you want to continue?",
+            buttonoktext: "Yes",
+            buttonnotext: "Cancel"
+        },
 
         width: '',
         height: '',
+
+        submitformbutton: '.submit-mobilepopup-form',
+        popupform: '.mobilepopup-form',
+
+        closeonoverflowclick: true,
+        shakeonoverflowclick: true,
+        fullscreeninmobile: true,
 
         closehtml: '<a href="" class="button-close close"></a>',
         loadinghtml: '<div class="loader-wrap"><div class="loader"><span></span><span></span><span></span></div></div>',
@@ -22,6 +42,9 @@
             return true;
         },
         onclosed : function(el){
+            return true;
+        },
+        onconfirmed : function(el){
             return true;
         },
         onformsubmited : function(data,el){ 
@@ -34,7 +57,10 @@
     	popupoverflow_class = "mobilepopup-overflow",
         popupouter_class = "mobilepopup-outer",
     	popupinner_class = "mobilepopup-inner",
+        confirmokformbutton = ".confirmok-mobilepopup-form",
+        confirmnoformbutton = ".confirmno-mobilepopup-form",
         _window = $(window),
+        shakeonoverflowclicktimeout = 0,
     	popupblock = popupoverflow = popupouter = popupinner = "";
 
 	var methods = {
@@ -47,12 +73,14 @@
 	    	get_popup_content();
 	    	popupblock.addClass("open");
 	    	$("body").addClass("mobilepopup-opened");
+            addremovemobilefullscreen();
 	    },
 	    reload: function(args) {
             options = $.extend(options, args);
             popupblock.attr("class",popupblock_class+" "+options.customclass+" open loading");
             set_popup_outer_sizes();
 	    	get_popup_content();
+            addremovemobilefullscreen();
 	    },
         resize: function(args) {
             options = $.extend(options, args);
@@ -68,13 +96,21 @@
 
 	var append_html_to_body = function(){
     	if($("."+popupblock_class).length==0){
-    		$("body").append("<div class='"+popupblock_class+" "+options.customclass+" disabled-animation-in-child loading'><div class='"+popupoverflow_class+"'></div><div class='"+popupouter_class+"'><div class='"+popupinner_class+"'></div>"+options.closehtml+options.loadinghtml+"</div></div>");
+    		$("body").append("<div class='"+popupblock_class+" "+options.customclass+" loading'><div class='"+popupoverflow_class+"'></div><div class='"+popupouter_class+"'><div class='"+popupinner_class+"'></div>"+options.closehtml+options.loadinghtml+"</div></div>");
     		popupblock = $("."+popupblock_class);
 		    popupoverflow = $("."+popupoverflow_class);
             popupinner = $("."+popupinner_class);
 		    popupouter = $("."+popupouter_class);
             init_actions();
     	}
+    }
+
+    var addremovemobilefullscreen = function(){
+        if(!options.fullscreeninmobile){
+            popupouter.addClass("disable-mobile-fullscreen");
+        }else{
+            popupouter.removeClass("disable-mobile-fullscreen");
+        }
     }
 
     var set_popup_outer_sizes = function(){
@@ -90,40 +126,74 @@
     }
 
     var get_popup_content = function(){
-    	if($.trim(options.ajax)!=""){
-	    	$.post(options.ajax,function(data){
-	    		popupinner.html(data);
+        switch(options.type){
+            case "standart":
+                if($.trim(options.ajax)!=""){
+                    $.post(options.ajax,function(data){
+                        popupinner.html(data);
+                        popupblock.removeClass("loading");
+                        options.onloaded(popupblock);
+                    });
+                }else{
+                    if($.trim(options.html)!=""||$.trim(options.targetblock)!=""){
+                        popupinner.html($.trim(options.html)!="" ? options.html : $(options.targetblock).find(">*").clone());
+                        popupblock.removeClass("loading");
+                        options.onloaded(popupblock);
+                    }else{
+                        if($.trim(options.content.content)!=""||$.trim(options.content.header)!=""||$.trim(options.content.footer)!=""){
+                            popupinner.html("<div class='header'>"+options.content.header+"</div><div class='content'>"+options.content.content+"</div><div class='footer'>"+options.content.footer+"</div>");
+                            popupblock.removeClass("loading");
+                            options.onloaded(popupblock);
+                        }
+                    }
+                } 
+                break;
+            case "confirm":
+                popupinner.html("<div class='header'>"+options.confirmcontent.header+"</div><div class='content'>"+options.confirmcontent.content+"</div><div class='footer'><a href='' class='button confirmok-mobilepopup-form'>"+options.confirmcontent.buttonoktext+"</a><a href='' class='button button-gray confirmno-mobilepopup-form'>"+options.confirmcontent.buttonnotext+"</a></div>");
                 popupblock.removeClass("loading");
                 options.onloaded(popupblock);
-	    	});
-    	}
-    	if($.trim(options.html)!=""||$.trim(options.targetblock)!=""){
-		    popupinner.html($.trim(options.html)!="" ? options.html : $(options.targetblock).find(">*").clone());
-            popupblock.removeClass("loading");
-            options.onloaded(popupblock);
-    	}
+                break;
+        }
+    	
     }
 
     var set_poppup_max_sizes = function(){
-        popupouter.css({"max-width":_window.innerWidth()+"px","max-height":_window.innerHeight()+"px"});
+        popupouter.css({"max-width":(_window.innerWidth()-20)+"px","max-height":(_window.innerHeight()-20)+"px"});
     }
 
     var init_actions = function(){
     	popupoverflow.on("click",function(){
-			methods.close();
+            if(options.closeonoverflowclick){
+		        methods.close();
+            }else{
+                if(options.shakeonoverflowclick&&!popupouter.hasClass("shake-popup")){
+                    popupouter.addClass("shake-popup");
+                    clearTimeout(shakeonoverflowclicktimeout);
+                    shakeonoverflowclicktimeout = setTimeout(function(){
+                        popupouter.removeClass("shake-popup");
+                    },500);
+                }
+            }
     		return false;
     	});
-    	popupblock.on("click",".close",function(){
+    	popupblock.on("click",".close,"+confirmnoformbutton,function(){
     		methods.close();
     		return false;
     	});
-        popupblock.on("click",".submit-popup-form",function(){
-            var form = popupblock.find(".popup-form");
-            popupblock.addClass("loading");
-            $.post(form.attr("action")+"?"+form.serialize(),function(data){
-                options.onformsubmited(data,popupblock);
-                popupblock.removeClass("loading");
-            });
+        popupblock.on("click",confirmokformbutton,function(){
+            options.onconfirmed(popupblock);
+            methods.close();
+            return false;
+        });
+        popupblock.on("click",options.submitformbutton,function(){
+            var form = popupblock.find(options.popupform);
+            if(form.length>0){
+                popupblock.addClass("loading");
+                $.post(form.attr("action")+"?"+form.serialize(),function(data){
+                    options.onformsubmited(data,popupblock);
+                    popupblock.removeClass("loading");
+                });
+            }
             return false;
         });
         _window.on('orientationchange resize', function() {
