@@ -5,11 +5,11 @@ Mobilepopup - jQuery pop-up plugin.  See the [project page](http://alexeydudka.c
 ## Changelog:
 
 ##### Version 1.5 - Semptember 20 2017
-* Added new features
-* 1. Added window type "standart" or "confirm"
-* 2. You can indicate form class and submit form button class
-* 3. Added properties closeonoverflowclick, shakeonoverflowclick, fullscreeninmobile
-* 4. Added folder with exapmles of use
+##### Added new features:
+* Added window type "standart" or "confirm"
+* You can indicate form class and submit form button class
+* Added properties closeonoverflowclick, shakeonoverflowclick, fullscreeninmobile
+* Added folder with exapmles of use
 
 ##### Version 1.4 - July 04 2017
 * fix chrome bug vh window max-height size
