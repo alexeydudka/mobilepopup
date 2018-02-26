@@ -4,6 +4,9 @@ Mobilepopup - jQuery pop-up plugin.  See the [project page](http://alexeydudka.c
 
 ## Changelog:
 
+##### Version 1.6 - Februari 26 2018
+* when opening by target class or id all content of target block go to popup? ob close popup go back. Fix id's attr duplication on html page
+
 ##### Version 1.5 - Semptember 20 2017
 ##### Added new features:
 * Added window type "standart" or "confirm"
